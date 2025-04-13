@@ -66,7 +66,7 @@ export function Quiz({ questions }: { questions: RawQuestion[] }) {
         <div className="space-y-3 py-3">
           <div className="flex space-x-3">
             <div className="text-white font-semibold">Grade: </div>
-            <div className="text-white font-semibold">{grade}%</div>
+            <div className="text-white font-semibold">{grade.toFixed(2)}%</div>
           </div>
           <div className="flex space-x-2">
             <div className="text-white">Description of Test: </div>
