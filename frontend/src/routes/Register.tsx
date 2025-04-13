@@ -1,20 +1,24 @@
 import { useState } from "react"
 
-export function Login() {
+export function Register() {
     const [userName, setUserName] = useState<string>("")
     const [password, setPassword] = useState<string>("")
-    const [loginError, setLoginError] = useState<boolean>(false)
+    const [confirmPassword, setConfirmPassword] = useState<string>("")
+    const [error, setError] = useState<"Existing_Account" | "Password_Error" | undefined >()
+
+    
 
 
-    const handleLogin = () => {
+    const handleRegister = () => {
         if (userName && password) {
             // repalce this actual functionallity
             console.log(userName + "     " + password)
             
-            // check if the user exists in the data base if not then set loginError state to true
+            // check if user already exists if it does then set existingAccountError to true
+            
         }
         else{
-            setLoginError(true)
+            setError("Password_Error")
         }
     }
 
@@ -41,12 +45,19 @@ export function Login() {
                         </svg>
                         <input placeholder="Password" className="focus:outline-0 bg-transparent text-white placeholder-gray-300" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     </div>
+                    <div className="flex items-center space-x-2 border-2 border-gray-300 p-3 rounded-xl bg-black/30 backdrop-blur-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6 text-white">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+                        </svg>
+                        <input placeholder="Confirm Password" className="focus:outline-0 bg-transparent text-white placeholder-gray-300" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                    </div>
                 </div>
                 {/* Login button */}
-                <button onClick={handleLogin} className="px-10 cursor-pointer border-2 border-indigo-500 text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg p-3 transition-all duration-300">
-                    Login
+                <button onClick={handleRegister} className="px-10 cursor-pointer border-2 border-indigo-500 text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg p-3 transition-all duration-300">
+                    Register Account
                 </button>
-                <div className={`text-red-500 text-lg ${loginError ? '' :'hidden'}`} >Incorrect Email or Password used</div>
+                <div className={`text-red-500 text-lg ${error === "Password_Error" ? '' :'hidden'}`} >The passwords should match</div>
+                <div className={`text-red-500 text-lg ${error=== "Existing_Account" ? '' :'hidden'}`} >That user already exists</div>
             </div>
         </div>
 
