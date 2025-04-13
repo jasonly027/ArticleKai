@@ -23,7 +23,7 @@ export default function Generate() {
         return;
       }
       navigate("/quiz", { state: { quiz } });
-    })
+    });
   };
 
   return (
@@ -38,7 +38,6 @@ export default function Generate() {
           error={isError}
         />
       </div>
-
     </>
   );
 }

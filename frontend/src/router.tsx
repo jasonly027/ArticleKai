@@ -5,6 +5,7 @@ import { Register } from "./routes/Register.tsx";
 import Generate from "./routes/Generate.tsx";
 import { isAuth } from "./lib/supabase.ts";
 import Quiz from "./routes/Quiz.tsx";
+import History from "./routes/History.tsx";
 
 async function validateIsAuthLoader() {
   const authed = await isAuth();
@@ -35,6 +36,11 @@ const router = createBrowserRouter([
   {
     path: "/generate",
     element: <Generate />,
+    loader: validateIsAuthLoader,
+  },
+  {
+    path: "/history",
+    element: <History />,
     loader: validateIsAuthLoader,
   },
   {

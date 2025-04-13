@@ -46,20 +46,26 @@ export async function signOut() {
   }
 }
 
-export async function saveQuiz(quiz: RawQuestion[]) {
-  const { error } = await supabase.from("quizzes").insert([{ quiz }]);
+export async function saveQuiz(quiz: RawQuestion[], description: string) {
+  const { error } = await supabase.from("quizzes").insert([{ quiz, description }]);
   if (error) {
     console.error("saveQuiz", error);
   }
 }
 
-export async function getQuizzes() {
+export interface SavedQuestion {
+  id: number;
+  questions: RawQuestion[];
+  description: string;
+}
+
+export async function getQuizzes(): Promise<SavedQuestion[]> {
   const { data, error } = await supabase.from("quizzes").select("*");
   if (error) {
     console.error("getQuizzes", error);
-    return;
+    return [];
   }
-  console.log("data", data);
+  return data.map(({ id, quiz, description }) => ({ id, questions: quiz, description }));
 }
 
 export async function deleteQuiz(id: number) {

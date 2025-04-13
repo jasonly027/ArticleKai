@@ -45,14 +45,15 @@ export default function TestBackend() {
       </button>
       <button
         onClick={async () => {
-          await saveQuiz([{ question: "To be?", options: ["yes", "no"], answer: "yes" }]);
+          await saveQuiz([{ question: "To be?", options: ["yes", "no"], answer: "yes" }], "despasito");
         }}
       >
         Save Quiz
       </button>
       <button
         onClick={async () => {
-          await getQuizzes();
+          const quizzes = await getQuizzes();
+          console.log(quizzes);
         }}
       >
         Get Quizzes
