@@ -20,7 +20,7 @@ export function GenerateQuizes({
           Information to quiz on:
         </label>
         <textarea
-          className="resize-none w-full h-32 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="resize-none w-100 h-32 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           value={genText}
           onChange={(e) => setGenText(e.target.value)}
           placeholder="Enter your content here..."
