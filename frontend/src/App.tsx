@@ -1,17 +1,16 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import { Quiz } from './components/Quiz'
-import { Login } from './routes/Login'
-import { Register } from './routes/Register'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Login } from './routes/Login';
+import { Register } from './routes/Register';
 
-function App() {
-  const [count, setCount] = useState(0)
+
+export default function App() {
 
   return (
-    <>
-    {/* <Quiz questions={[
+     <App></App>
+    /* <Quiz questions={[
   {
     "question": "What is the capital of France?",
     "answer": "Paris",
@@ -37,11 +36,10 @@ function App() {
     "answer": "Mars",
     "options": ["Mars", "Venus", "Jupiter", "Mercury"]
   }
-]}></Quiz> */}
-    {/* <Login></Login> */}
-    <Register></Register>
-    </>
+]}></Quiz> */
+    /* <Login></Login> */
+
+
   )
 }
 
-export default App
