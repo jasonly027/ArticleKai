@@ -21,12 +21,17 @@
   "homepage": "https://github.com/jasonly027/ArticleKai#readme",
   "description": "",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^5.1.0",
-    "typescript": "^5.8.3"
+    "express-rate-limit": "^7.5.0",
+    "openai": "^4.93.0",
+    "typescript": "^5.8.3",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.24.0",
     "@tsconfig/node22": "^22.0.1",
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
     "@types/node": "^22.14.1",
     "eslint": "^9.24.0",
