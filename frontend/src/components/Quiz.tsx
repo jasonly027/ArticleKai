@@ -1,12 +1,12 @@
 import { useState } from "react";
-import Question, { QuestionInterface } from "./Question";
+import Question from "./Question";
 
-export interface rawQuestion {
+export interface RawQuestion {
   question: string;
   answer: string;
   options: string[];
 }
-export function Quiz({ questions }: { questions: rawQuestion[] }) {
+export function Quiz({ questions }: { questions: RawQuestion[] }) {
   const [selectedOptions, setSelectedOptions] = useState<(string | null)[]>(
     questions.map(() => null)
   );

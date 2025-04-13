@@ -1,26 +1,38 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { signUp } from "../lib/supabase";
+
+type LoginError = "ExistingAccount" | "PasswordMismatch" | "MissingFields";
 
 export function Register() {
   const [userName, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [error, setError] = useState<"Existing_Account" | "Password_Error" | undefined>();
+  const [error, setError] = useState<LoginError | null>(null);
 
-  const handleRegister = () => {
-    if (userName && password) {
-      // repalce this actual functionallity
-      console.log(userName + "     " + password);
+  const navigate = useNavigate();
 
-      // check if user already exists if it does then set existingAccountError to true
+  const handleRegister = async () => {
+    if (userName === "" || password === "" || confirmPassword === "") {
+      setError("MissingFields");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError("PasswordMismatch");
+      return;
+    }
+
+    const ok = await signUp(userName, password);
+
+    if (ok) {
+      navigate("/generate");
     } else {
-      setError("Password_Error");
+      setError("ExistingAccount");
     }
   };
 
   return (
-    // entire login box
-
     <div className="flex flex-col items-center justify-center  bg-[url('https://images.unsplash.com/photo-1538370965046-79c0d6907d47?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-repeat bg-gradient-to-b from-[#0f2027] via-[#000101] to-[#162b34] w-screen h-screen">
       <div className="flex flex-col items-center space-y-[1rem] border-0 p-40 bg-gradient-to-r from-indigo-600 via-purple-600 to-gray-700 rounded-3xl shadow-2xl ring-1 ring-white/10 opacity-96">
         <div className="text-4xl text-blue-300 font-extrabold">ArticleKai</div>
@@ -109,13 +121,19 @@ export function Register() {
         >
           Register Account
         </button>
-        <div className={`text-red-500 text-lg ${error === "Password_Error" ? "" : "hidden"}`}>
-          The passwords should match
-        </div>
-        <div className={`text-red-500 text-lg ${error === "Existing_Account" ? "" : "hidden"}`}>
-          That user already exists
-        </div>
+        {error !== null && <div className="text-red-500 text-lg">{toErrorMsg(error)}</div>}
       </div>
     </div>
   );
+}
+
+function toErrorMsg(error: LoginError): string {
+  switch (error) {
+    case "PasswordMismatch":
+      return "The passwords should match";
+    case "ExistingAccount":
+      return "That user already exists";
+    case "MissingFields":
+      return "Some fields are empty";
+  }
 }

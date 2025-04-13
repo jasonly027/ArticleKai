@@ -1,25 +1,27 @@
-import { Session } from "@supabase/supabase-js";
+import { User } from "@supabase/supabase-js";
 import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from "react";
 import supabase from "../lib/supabase";
 
 export type AuthValue = {
-  session: Session | null;
+  user: User | null;
 };
 
 const AuthContext = createContext<AuthValue | undefined>(undefined);
 
 export function AuthProvider({ children }: { children?: ReactNode }) {
-  const [session, setSession] = useState<Session | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
-  const authValue: AuthValue = useMemo(() => ({ session }), [session]);
+  const authValue: AuthValue = useMemo(() => ({ user }), [user]);
 
   useEffect(function syncSessionChange() {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setUser(user);
     });
 
     supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
+      if (session) {
+        setUser(session.user);
+      }
     });
   }, []);
 

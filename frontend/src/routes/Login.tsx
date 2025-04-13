@@ -1,26 +1,33 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { signIn } from "../lib/supabase";
 
 export function Login() {
   const [userName, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loginError, setLoginError] = useState<boolean>(false);
 
-  const handleLogin = () => {
-    if (userName && password) {
-      // repalce this actual functionallity
-      console.log(userName + "     " + password);
+  const navigate = useNavigate();
 
-      // check if the user exists in the data base if not then set loginError state to true
-    } else {
+  const handleLogin = async () => {
+    if (!userName || !password) {
       setLoginError(true);
+      return;
+    }
+
+    const ok = await signIn(userName, password);
+
+    if (ok) {
+      navigate("/generate");
+    } else {
+      setLoginError(!ok);
     }
   };
 
   return (
     // entire login box
 
-    <div className="flex flex-col items-center justify-center  bg-[url('https://images.unsplash.com/photo-1538370965046-79c0d6907d47?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-repeat bg-gradient-to-b from-[#0f2027] via-[#000101] to-[#162b34] w-screen h-screen">
+    <div className="flex flex-col items-center justify-center  w-screen h-screen">
       <div className="flex flex-col items-center space-y-[1rem] border-0 p-40 bg-gradient-to-r from-indigo-600 via-purple-600 to-gray-700 rounded-3xl shadow-2xl ring-1 ring-white/10 opacity-96">
         <div className="text-4xl text-blue-300 font-extrabold">ArticleKai</div>
         {/* email and password tags */}
@@ -85,9 +92,7 @@ export function Login() {
         >
           Login
         </button>
-        <div className={`text-red-500 text-lg ${loginError ? "" : "hidden"}`}>
-          Incorrect Email or Password used
-        </div>
+        {loginError && <div className="text-red-500 text-lg">Incorrect Email or Password used</div>}
       </div>
     </div>
   );

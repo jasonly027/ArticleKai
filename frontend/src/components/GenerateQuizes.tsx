@@ -1,12 +1,16 @@
-import { Link } from "react-router-dom";
-
 type GenerateQuizesProps = {
   genText: string;
   setGenText: (genText: string) => void;
   handleGenerateQuiz: () => void;
+  error: boolean;
 };
 
-export function GenerateQuizes({ genText, setGenText, handleGenerateQuiz }: GenerateQuizesProps) {
+export function GenerateQuizes({
+  genText,
+  setGenText,
+  handleGenerateQuiz,
+  error,
+}: GenerateQuizesProps) {
   return (
     <div className="max-w-md mx-auto space-y-6 p-6 bg-white rounded-2xl shadow-lg w-full">
       <h2 className="text-2xl font-semibold text-center">Generate a New Quiz</h2>
@@ -22,6 +26,7 @@ export function GenerateQuizes({ genText, setGenText, handleGenerateQuiz }: Gene
           placeholder="Enter your content here..."
         />
       </div>
+      {error && <p className="text-red-500">Failed to generate quiz. Please try again</p>}
 
       <button
         className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300"

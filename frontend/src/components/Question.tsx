@@ -1,5 +1,3 @@
-import React from "react";
-
 export interface QuestionInterface {
   question: string;
   options: string[];
