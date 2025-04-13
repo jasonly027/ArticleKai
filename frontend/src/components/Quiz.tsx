@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Question from "./Question";
+import { saveQuiz } from "../lib/supabase";
+import { useNavigate } from "react-router-dom";
 
 export interface RawQuestion {
   question: string;
@@ -7,11 +9,14 @@ export interface RawQuestion {
   options: string[];
 }
 export function Quiz({ questions }: { questions: RawQuestion[] }) {
+  const navigate = useNavigate()
   const [selectedOptions, setSelectedOptions] = useState<(string | null)[]>(
     questions.map(() => null)
   );
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [grade, setGrade] = useState<number>()
+  const [grade, setGrade] = useState<number>(0)
+  const [isEmptyDesc, setIsEmptyDesc] = useState<boolean>(false)
+  const [desc, setDesc] = useState<string>("")
 
   const handleOptionChange = (index: number, value: string) => {
     const newSelections = [...selectedOptions];
@@ -27,8 +32,12 @@ export function Quiz({ questions }: { questions: RawQuestion[] }) {
     }, 0);
     setGrade((score / questions.length) * 100);
   };
-  const handleSave = () => {
-    
+  const handleSave = async() => {
+    if (desc !== ""){
+      saveQuiz(questions, desc)
+      navigate("/history")
+    }
+    setIsEmptyDesc(true)
   }
   return (
     <div className="flex flex-col my-2 items-center space-y-6">
@@ -61,7 +70,7 @@ export function Quiz({ questions }: { questions: RawQuestion[] }) {
           </div>
           <div className="flex space-x-2">
             <div className="text-white">Description of Test: </div>
-            <input type="text" className="rounded-xl bg-white" />
+            <input value={desc} onChange={(e) => setDesc(e.target.value)} type="text" className="rounded-xl bg-white" />
           </div>
 
           <div className="flex justify-center py-4">
@@ -75,13 +84,13 @@ export function Quiz({ questions }: { questions: RawQuestion[] }) {
 
 
         </div>
-
-
       }
 
-
-
-
+      {
+        isEmptyDesc &&
+        <div className="text-red-600">Please enter a description</div>
+      }
+      
 
     </div>
   );
