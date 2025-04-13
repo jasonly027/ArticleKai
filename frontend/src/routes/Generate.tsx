@@ -7,15 +7,22 @@ export default function Generate() {
   const [genText, setGenText] = useState<string>("");
   const [isError, setIsError] = useState<boolean>(false);
 
+  const [loading, setLoading] = useState<boolean>(false);
+
   const navigate = useNavigate();
 
-  const handleGenerateQuiz = async () => {
-    const quiz = await generateQuiz(genText);
-    if (quiz.length === 0) {
-      setIsError(true);
-      return;
-    }
-    navigate("/quiz", { state: { quiz } });
+  const handleGenerateQuiz = () => {
+    if (loading) return;
+
+    setLoading(true);
+    generateQuiz(genText).then((quiz) => {
+      if (quiz.length === 0) {
+        setIsError(true);
+        setLoading(false);
+        return;
+      }
+      navigate("/quiz", { state: { quiz } });
+    })
   };
 
   return (
@@ -24,6 +31,7 @@ export default function Generate() {
         genText={genText}
         setGenText={setGenText}
         handleGenerateQuiz={handleGenerateQuiz}
+        loading={loading}
         error={isError}
       />
     </>

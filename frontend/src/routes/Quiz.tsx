@@ -8,7 +8,7 @@ export default function Quiz() {
 
   useEffect(
     function navigateOnNoQuiz() {
-      if (!location.state.quiz) {
+      if (!location.state?.quiz) {
         navigate("/generate", { replace: true });
       }
     },
@@ -18,7 +18,7 @@ export default function Quiz() {
   return (
     <>
       <QuizComponent
-        questions={location.state.quiz}
+        questions={location.state?.quiz ?? []}
         // questions={[
         //   {
         //     question: "What is the capital of France?",

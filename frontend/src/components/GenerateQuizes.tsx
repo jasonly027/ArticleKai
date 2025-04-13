@@ -2,6 +2,7 @@ type GenerateQuizesProps = {
   genText: string;
   setGenText: (genText: string) => void;
   handleGenerateQuiz: () => void;
+  loading: boolean,
   error: boolean;
 };
 
@@ -9,6 +10,7 @@ export function GenerateQuizes({
   genText,
   setGenText,
   handleGenerateQuiz,
+  loading,
   error,
 }: GenerateQuizesProps) {
   return (
@@ -29,10 +31,11 @@ export function GenerateQuizes({
       {error && <p className="text-red-500">Failed to generate quiz. Please try again</p>}
 
       <button
-        className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300"
+        className="w-full disabled:cursor-not-allowed py-2 px-4 bg-blue-600 disabled:bg-sky-700 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300"
         onClick={handleGenerateQuiz}
+        disabled={loading}
       >
-        Generate
+        {loading ? "Loading..." : "Generate"}
       </button>
     </div>
   );
