@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link } from "react-router-dom"
 
 export function Register() {
     const [userName, setUserName] = useState<string>("")
@@ -52,7 +53,8 @@ export function Register() {
                         <input placeholder="Confirm Password" className="focus:outline-0 bg-transparent text-white placeholder-gray-300" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                     </div>
                 </div>
-                {/* Login button */}
+                <Link to="/login" className="text-[#96ccff]">Already have an account?</Link>
+                {/* Register button */}
                 <button onClick={handleRegister} className="px-10 cursor-pointer border-2 border-indigo-500 text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg p-3 transition-all duration-300">
                     Register Account
                 </button>
