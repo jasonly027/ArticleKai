@@ -6,6 +6,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Login } from './routes/Login.tsx'
 import { Register } from './routes/Register.tsx'
 import { Quiz } from './components/Quiz.tsx'
+import { GenerateQuizes } from './components/GenerateQuizes.tsx'
+import { QuizOptions } from './routes/QuizOptions.tsx'
+import { QuizHistory } from './components/QuizHistory.tsx'
 
 const router = createBrowserRouter([
   { path: "/", element: <Login></Login> },
@@ -40,6 +43,7 @@ const router = createBrowserRouter([
       }
     ]}></Quiz>
   },
+  {path:"/quiz_options", element:<QuizOptions></QuizOptions>},
 
 ])
 
