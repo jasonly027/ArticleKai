@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export interface QuestionInterface {
   question: string;
@@ -7,9 +7,16 @@ export interface QuestionInterface {
   onOptionChange: (value: string) => void;
   isSubmitted: boolean;
   correctAnswer: string;
-};
+}
 
-function Question({question, options, selectedOption, onOptionChange, isSubmitted, correctAnswer}:QuestionInterface){
+function Question({
+  question,
+  options,
+  selectedOption,
+  onOptionChange,
+  isSubmitted,
+  correctAnswer,
+}: QuestionInterface) {
   return (
     <div className="mb-6 text-center">
       <div className="text-lg font-semibold mb-2">{question}</div>
@@ -20,8 +27,8 @@ function Question({question, options, selectedOption, onOptionChange, isSubmitte
             className={`block w-64 px-4 py-2 border rounded cursor-pointer text-center transition
               ${
                 selectedOption === option
-                  ? 'bg-blue-100 border-blue-500'
-                  : 'bg-white border-gray-300'
+                  ? "bg-blue-100 border-blue-500"
+                  : "bg-white border-gray-300"
               }
               hover:bg-blue-50`}
           >
@@ -50,6 +57,5 @@ function Question({question, options, selectedOption, onOptionChange, isSubmitte
     </div>
   );
 }
-
 
 export default Question;
