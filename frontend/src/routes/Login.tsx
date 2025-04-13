@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signIn } from "../lib/supabase";
+import StarryBackground from "../components/starry-background";
 
 export function Login() {
   const [userName, setUserName] = useState<string>("");
@@ -26,8 +27,9 @@ export function Login() {
 
   return (
     // entire login box
-
+    
     <div className="flex flex-col items-center justify-center  w-screen h-screen">
+      <StarryBackground></StarryBackground>
       <div className="flex flex-col items-center space-y-[1rem] border-0 p-40 bg-gradient-to-r from-indigo-600 via-purple-600 to-gray-700 rounded-3xl shadow-2xl ring-1 ring-white/10 opacity-96">
         <div className="text-4xl text-blue-300 font-extrabold">ArticleKai</div>
         {/* email and password tags */}
