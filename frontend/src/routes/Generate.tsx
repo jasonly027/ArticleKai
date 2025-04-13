@@ -2,6 +2,7 @@ import { useState } from "react";
 import { GenerateQuizes } from "../components/GenerateQuizes";
 import { useNavigate } from "react-router-dom";
 import generateQuiz from "../lib/generate";
+import { NavBar } from "../components/NavBar";
 
 export default function Generate() {
   const [genText, setGenText] = useState<string>("");
@@ -27,13 +28,17 @@ export default function Generate() {
 
   return (
     <>
-      <GenerateQuizes
-        genText={genText}
-        setGenText={setGenText}
-        handleGenerateQuiz={handleGenerateQuiz}
-        loading={loading}
-        error={isError}
-      />
+      <NavBar></NavBar>
+      <div className="absolute top-1/2 left-1/2  -translate-x-1/2 -translate-y-1/2  ">
+        <GenerateQuizes
+          genText={genText}
+          setGenText={setGenText}
+          handleGenerateQuiz={handleGenerateQuiz}
+          loading={loading}
+          error={isError}
+        />
+      </div>
+
     </>
   );
 }
