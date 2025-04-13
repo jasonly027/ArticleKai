@@ -24,7 +24,7 @@ export function Quiz({ questions }: { questions: rawQuestion[] }) {
     const score = questions.reduce((total, q, index) => {
       return total + (selectedOptions[index] === q.answer ? 1 : 0);
     }, 0);
-    console.log('Score:', score);
+    console.log('Grade: '+ (score/questions.length * 100).toFixed(2) + "%");
   };
   return (
     <div className="flex flex-col">

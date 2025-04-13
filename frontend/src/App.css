@@ -1,0 +1,18 @@
+/* In your global CSS (e.g. index.css or globals.css) */
+@layer utilities {
+    .stars-bg::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: url("https://raw.githubusercontent.com/Julian-Nash/space-backgrounds/main/stars.svg") repeat;
+      z-index: -1;
+      opacity: 0.4;
+      animation: moveStars 60s linear infinite;
+    }
+  
+    @keyframes moveStars {
+      from { background-position: 0 0; }
+      to { background-position: 1000px 1000px; }
+    }
+  }

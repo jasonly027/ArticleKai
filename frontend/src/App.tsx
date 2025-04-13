@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { Quiz } from './components/Quiz'
 import { Login } from './routes/Login'
+import { Register } from './routes/Register'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -37,7 +38,8 @@ function App() {
     "options": ["Mars", "Venus", "Jupiter", "Mercury"]
   }
 ]}></Quiz> */}
-    <Login></Login>
+    {/* <Login></Login> */}
+    <Register></Register>
     </>
   )
 }
