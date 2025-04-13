@@ -19,7 +19,7 @@ export async function generateQuiz(text: string): Promise<QuizArray> {
   const response = await client.responses.create({
     model: "gpt-4o-mini",
     instructions:
-      "You are an AI that strictly views the input as the single source of knowledge. You must respond with an array of JSON objects in the following format [{ 'question': 'the question text', 'options': ['option1', 'option2', ...], 'answer': 'correct option' }]. Ensure the question is clear and options are concise. The answer should be the option that best fits the question.",
+      "You are an AI that strictly views the input as the single source of knowledge. You must respond with an array of JSON objects in the following format [{ 'question': 'the question text', 'options': ['option1', 'option2', ...], 'answer': 'correct option' }]. Ensure the question is clear and options are concise. The answer should be the option that best fits the question. Do not create questions that cannot be answered by looking at the input.",
     input: text,
   });
 
