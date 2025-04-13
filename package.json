@@ -1,0 +1,14 @@
+{
+  "name": "articlekai",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w frontend & npm run dev -w backend"
+  },
+  "devDependencies": {
+    "eslint": "^9.24.0"
+  }
+}
