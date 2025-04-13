@@ -1,46 +1,55 @@
-import { use, useState } from "react"
+import React from 'react';
 
 export interface QuestionInterface {
-    question: string,
-    options: string[],
-    answer: string
+  question: string;
+  options: string[];
+  selectedOption: string | null;
+  onOptionChange: (value: string) => void;
+  isSubmitted: boolean;
+  correctAnswer: string;
+};
+
+function Question({question, options, selectedOption, onOptionChange, isSubmitted, correctAnswer}:QuestionInterface){
+  return (
+    <div className="mb-6 text-center">
+      <div className="text-lg font-semibold mb-2">{question}</div>
+      <div className="flex flex-col items-center space-y-2">
+        {options.map((option, index) => (
+          <label
+            key={index}
+            className={`block w-64 px-4 py-2 border rounded cursor-pointer text-center transition
+              ${
+                selectedOption === option
+                  ? 'bg-blue-100 border-blue-500'
+                  : 'bg-white border-gray-300'
+              }
+              hover:bg-blue-50`}
+          >
+            <input
+              type="radio"
+              name={question}
+              value={option}
+              checked={selectedOption === option}
+              onChange={() => onOptionChange(option)}
+              disabled={isSubmitted}
+              className="hidden"
+            />
+            {option}
+          </label>
+        ))}
+      </div>
+      {isSubmitted && (
+        <div className="mt-2 text-sm">
+          {selectedOption === correctAnswer ? (
+            <span className="text-green-600">Correct!</span>
+          ) : (
+            <span className="text-red-600">Wrong. Correct answer: {correctAnswer}</span>
+          )}
+        </div>
+      )}
+    </div>
+  );
 }
-export function Question({ question, options, answer }: QuestionInterface) {
-    const [selectedOption, setSelectedOption] = useState<string | null>(null)
-    const [isSubmitted, setIsSubmitted] = useState(false)
-
-    const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) =>{
-        setSelectedOption(event.target.value);
-    };
-    
-
-    return (
-        <>
-            <div className="flex flex-col items-center py-[1rem]">
-                <div className="py-[2rem]">{question}</div>
-                {options.map((option, index) => (
-                    <div key={index}>
-                        <label>
-                            <input
-                                type="radio"
-                                name="option"
-                                value={option}
-                                checked={selectedOption === option}
-                                onChange={handleOptionChange}
-                                disabled={isSubmitted}
-                                className="hidden"
-                                
-                                
-                            />
-                            {option}
-                        </label>
-                    </div>
-
-                ))}
-            </div>
-
-        </>
 
 
-    )
-}
+export default Question;
