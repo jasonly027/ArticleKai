@@ -3,6 +3,7 @@ import { GenerateQuizes } from "../components/GenerateQuizes";
 import { useNavigate } from "react-router-dom";
 import generateQuiz from "../lib/generate";
 import { NavBar } from "../components/NavBar";
+import StarryBackground from "../components/starry-background";
 
 export default function Generate() {
   const [genText, setGenText] = useState<string>("");
@@ -29,6 +30,7 @@ export default function Generate() {
   return (
     <>
       <NavBar></NavBar>
+      <StarryBackground></StarryBackground>
       <div className="absolute top-1/2 left-1/2  -translate-x-1/2 -translate-y-1/2  ">
         <GenerateQuizes
           genText={genText}

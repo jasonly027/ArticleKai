@@ -16,8 +16,8 @@ function Question({
   correctAnswer,
 }: QuestionInterface) {
   return (
-    <div className="mb-6 text-center">
-      <div className="text-white text-lg font-semibold mb-2">{question}</div>
+    <div className="my-4 text-center">
+      <div className="text-white text-lg font-semibold mb-4">{question}</div>
       <div className="flex flex-col items-center space-y-2">
         {options.map((option, index) => (
           <label
