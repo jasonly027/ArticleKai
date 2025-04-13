@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { Quiz as QuizComponent } from "../components/Quiz";
 import { useEffect } from "react";
+import { NavBar } from "../components/NavBar";
 
 export default function Quiz() {
   const location = useLocation();
@@ -8,7 +9,7 @@ export default function Quiz() {
 
   useEffect(
     function navigateOnNoQuiz() {
-      if (!location.state.quiz) {
+      if (!location.state?.quiz) {
         navigate("/generate", { replace: true });
       }
     },
@@ -17,8 +18,9 @@ export default function Quiz() {
 
   return (
     <>
+      <NavBar></NavBar>
       <QuizComponent
-        questions={location.state.quiz}
+        questions={location.state?.quiz ?? []}
         // questions={[
         //   {
         //     question: "What is the capital of France?",
